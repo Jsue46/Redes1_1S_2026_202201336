@@ -1,0 +1,554 @@
+=================================
+SW-CORE-A
+=================================
+enable
+configure terminal
+hostname SW-CORE-A
+no ip domain-lookup
+enable secret 202201336
+service password-encryption
+banner motd ^CACCESO SOLO AUTORIZADO - PRACTICA2^C
+
+spanning-tree mode rapid-pvst
+
+vtp domain 202201336
+vtp mode server
+vtp password area1
+vtp version 2
+
+vlan 16
+ name QUIROFANO
+vlan 26
+ name UCI
+vlan 36
+ name ADMIN
+vlan 46
+ name FARMACIA
+vlan 56
+ name LAB
+vlan 99
+ name NATIVE
+vlan 999
+ name BLACKHOLE
+
+interface range fa0/7-9
+ description ETH-CH-TO-SW-CORE-B
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ channel-group 1 mode desirable
+ no shutdown
+exit
+
+interface port-channel 1
+ description PO1-COREA-COREB
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/1-6
+ description TRUNK-TO-HOSPITAL-SW
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/10-24
+ description UNUSED-BLACKHOLE
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+exit
+
+spanning-tree vlan 16,26,36,46,56,99 root primary
+
+line console 0
+ password 202201336
+ login
+line vty 0 15
+ password 202201336
+ login
+end
+write memory
+
+
+=================================
+SW-CORE-B
+=================================
+enable
+configure terminal
+hostname SW-CORE-B
+no ip domain-lookup
+enable secret 202201336
+service password-encryption
+banner motd ^CACCESO SOLO AUTORIZADO - PRACTICA2^C
+
+spanning-tree mode rapid-pvst
+
+vtp domain 202201336
+vtp mode client
+vtp password area1
+vtp version 2
+
+interface range fa0/7-9
+ description ETH-CH-TO-SW-CORE-A
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ channel-group 1 mode auto
+ no shutdown
+exit
+
+interface port-channel 1
+ description PO1-COREB-COREA
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/1-6
+ description TRUNK-TO-HOSPITAL-SW
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/10-24
+ description UNUSED-BLACKHOLE
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+exit
+
+spanning-tree vlan 16,26,36,46,56,99 root secondary
+
+line console 0
+ password 202201336
+ login
+line vty 0 15
+ password 202201336
+ login
+end
+write memory
+
+
+=================================
+SW-H1-Roosevelt
+=================================
+enable
+configure terminal
+hostname SW-H1-Roosevelt
+no ip domain-lookup
+enable secret 202201336
+service password-encryption
+banner motd ^CACCESO SOLO AUTORIZADO - PRACTICA2^C
+
+spanning-tree mode rapid-pvst
+vtp domain 202201336
+vtp mode client
+vtp password area1
+vtp version 2
+
+interface fa0/1
+ description HUB-H1-A-VLAN16
+ switchport mode access
+ switchport access vlan 16
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/2
+ description HUB-H1-B-VLAN26
+ switchport mode access
+ switchport access vlan 26
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/3
+ description HUB-H1-C-VLAN36
+ switchport mode access
+ switchport access vlan 36
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/4
+ description TRUNK-TO-SW-CORE-A
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface fa0/5
+ description TRUNK-TO-SW-CORE-B
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/6-24
+ description UNUSED-BLACKHOLE
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+exit
+
+line console 0
+ password 202201336
+ login
+line vty 0 15
+ password 202201336
+ login
+end
+write memory
+
+
+=================================
+SW-H2-SJDD
+=================================
+enable
+configure terminal
+hostname SW-H2-SJDD
+no ip domain-lookup
+enable secret 202201336
+service password-encryption
+banner motd ^CACCESO SOLO AUTORIZADO - PRACTICA2^C
+
+spanning-tree mode rapid-pvst
+vtp domain 202201336
+vtp mode client
+vtp password area1
+vtp version 2
+
+interface fa0/1
+ description HUB-H2-A-VLAN16
+ switchport mode access
+ switchport access vlan 16
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/2
+ description HUB-H2-B-VLAN46
+ switchport mode access
+ switchport access vlan 46
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/3
+ description TRUNK-TO-SW-CORE-A
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface fa0/4
+ description TRUNK-TO-SW-CORE-B
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/5-24
+ description UNUSED-BLACKHOLE
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+exit
+
+line console 0
+ password 202201336
+ login
+line vty 0 15
+ password 202201336
+ login
+end
+write memory
+
+
+=================================
+SW-H3-IGSSZ9
+=================================
+enable
+configure terminal
+hostname SW-H3-IGSSZ9
+no ip domain-lookup
+enable secret 202201336
+service password-encryption
+banner motd ^CACCESO SOLO AUTORIZADO - PRACTICA2^C
+
+spanning-tree mode rapid-pvst
+vtp domain 202201336
+vtp mode client
+vtp password area1
+vtp version 2
+
+interface fa0/1
+ description HUB-H3-A-VLAN26
+ switchport mode access
+ switchport access vlan 26
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/2
+ description HUB-H3-B-VLAN36
+ switchport mode access
+ switchport access vlan 36
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/3
+ description HUB-H3-C-VLAN56
+ switchport mode access
+ switchport access vlan 56
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/4
+ description TRUNK-TO-SW-CORE-A
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface fa0/5
+ description TRUNK-TO-SW-CORE-B
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/6-24
+ description UNUSED-BLACKHOLE
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+exit
+
+line console 0
+ password 202201336
+ login
+line vty 0 15
+ password 202201336
+ login
+end
+write memory
+
+
+=================================
+SW-H4-Militar
+=================================
+enable
+configure terminal
+hostname SW-H4-Militar
+no ip domain-lookup
+enable secret 202201336
+service password-encryption
+banner motd ^CACCESO SOLO AUTORIZADO - PRACTICA2^C
+
+spanning-tree mode rapid-pvst
+vtp domain 202201336
+vtp mode client
+vtp password area1
+vtp version 2
+
+interface fa0/1
+ description HUB-H4-A-VLAN16
+ switchport mode access
+ switchport access vlan 16
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/2
+ description HUB-H4-B-VLAN46
+ switchport mode access
+ switchport access vlan 46
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/3
+ description TRUNK-TO-SW-CORE-A
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface fa0/4
+ description TRUNK-TO-SW-CORE-B
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/5-24
+ description UNUSED-BLACKHOLE
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+exit
+
+line console 0
+ password 202201336
+ login
+line vty 0 15
+ password 202201336
+ login
+end
+write memory
+
+
+=================================
+SW-H5-VillaNueva
+=================================
+enable
+configure terminal
+hostname SW-H5-VillaNueva
+no ip domain-lookup
+enable secret 202201336
+service password-encryption
+banner motd ^CACCESO SOLO AUTORIZADO - PRACTICA2^C
+
+spanning-tree mode rapid-pvst
+vtp domain 202201336
+vtp mode client
+vtp password area1
+vtp version 2
+
+interface fa0/1
+ description HUB-H5-A-VLAN26
+ switchport mode access
+ switchport access vlan 26
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/2
+ description HUB-H5-B-VLAN56
+ switchport mode access
+ switchport access vlan 56
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/3
+ description TRUNK-TO-SW-CORE-A
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface fa0/4
+ description TRUNK-TO-SW-CORE-B
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/5-24
+ description UNUSED-BLACKHOLE
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+exit
+
+line console 0
+ password 202201336
+ login
+line vty 0 15
+ password 202201336
+ login
+end
+write memory
+
+
+=================================
+SW-H6-Amatitlan
+=================================
+enable
+configure terminal
+hostname SW-H6-Amatitlan
+no ip domain-lookup
+enable secret 202201336
+service password-encryption
+banner motd ^CACCESO SOLO AUTORIZADO - PRACTICA2^C
+
+spanning-tree mode rapid-pvst
+vtp domain 202201336
+vtp mode client
+vtp password area1
+vtp version 2
+
+interface fa0/1
+ description HUB-H6-A-VLAN36
+ switchport mode access
+ switchport access vlan 36
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+exit
+
+interface fa0/2
+ description TRUNK-TO-SW-CORE-A
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface fa0/3
+ description TRUNK-TO-SW-CORE-B
+ switchport mode trunk
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 16,26,36,46,56,99,999
+ no shutdown
+exit
+
+interface range fa0/4-24
+ description UNUSED-BLACKHOLE
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+exit
+
+line console 0
+ password 202201336
+ login
+line vty 0 15
+ password 202201336
+ login
+end
+write memory
