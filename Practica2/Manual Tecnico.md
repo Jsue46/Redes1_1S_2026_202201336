@@ -242,17 +242,7 @@ Para cumplir documentacion de detalle completo, se resume por equipo:
 7. Accesos: puertos de hubs a su VLAN correspondiente.
 8. Puertos no usados: VLAN 999 + shutdown.
 
-Evidencia CLI sugerida (capturas):
 
-1. `Practica2/images/cli_core_a.png`
-   ![Texto alternativo](./images/topo1.png)
-2. `Practica2/images/cli_core_b.png`
-3. `Practica2/images/cli_h1.png`
-4. `Practica2/images/cli_h2.png`
-5. `Practica2/images/cli_h3.png`
-6. `Practica2/images/cli_h4.png`
-7. `Practica2/images/cli_h5.png`
-8. `Practica2/images/cli_h6.png`
 
 ---
 
