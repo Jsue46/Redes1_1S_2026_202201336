@@ -1,78 +1,65 @@
-# Práctica 1 – Diseño e Implementación de Red LAN  
-## Redes de Computadoras 1  
-### Universidad San Carlos de Guatemala  
-### Facultad de Ingeniería  
-### Ingeniería en Ciencias y Sistemas  
+# Corporate Campus LAN Infrastructure Design — Constructiva S.A.
+
+Academic project developed for the **Computer Networks 1** course at the Universidad de San Carlos de Guatemala (First Semester 2026).
+
+This repository contains the design, structured cabling plan, IPv4 addressing scheme, and Cisco switch configurations for an enterprise 3-story corporate building network modeled in **Cisco Packet Tracer**.
 
 ---
 
-## 📌 Información del Estudiante
+## Overview
 
-- **Nombre:** Estuardo Vaquiax  
-- **Carnet:** 202201336  
-- **Semestre:** 1S-2026  
-- **Curso:** Redes de Computadoras 1  
+The network serves multiple corporate departments organized across three distinct floors. The topology incorporates strict TIA/EIA-568B cabling standards, static IPv4 subnet allocation, hierarchical switch interconnection using Cisco Catalyst 2960 switches, and connectivity verification through packet-level ARP and ICMP tracing.
 
 ---
 
-## 🏢 Descripción del Proyecto
+## Topology Structure
 
-En esta práctica se diseñó e implementó una red LAN para la empresa **Constructiva S.A.**, simulando un edificio corporativo de tres niveles.
+- **Floor 1 (Reception and Administration):** Reception, Accounting, Legal Department, and Main Conference Hall.
+- **Floor 2 (Architectural Design and Urbanism):** Architecture Lab, Urban Planning Department, Blueprint Review Room.
+- **Floor 3 (Engineering and Executive Management):** Executive Directorate, Civil Engineering Department, and Primary Data Center / Server Room.
 
-La red fue desarrollada en **Cisco Packet Tracer**, aplicando:
-
-- Direccionamiento IPv4 estático
-- Configuración de switches mediante CLI
-- Cableado estructurado bajo el estándar TIA/EIA-568B
-- Organización visual por departamentos
-- Verificación de conectividad total mediante pruebas de ping
-- Análisis de paquetes ARP e ICMP en modo simulación
+Each level features a designated distribution switch routing departmental access switches back to the primary building backbone.
 
 ---
 
-## 🧱 Estructura de la Red
+## Key Features
 
-El edificio está dividido en:
-
-### Piso 1 – Recepción y Administración
-- Recepción
-- Contabilidad
-- Legal
-- Sala de Reuniones
-
-### Piso 2 – Diseño Arquitectónico y Urbanismo
-- Arquitectura
-- Urbanismo
-- Sala de revisión de planos
-
-### Piso 3 – Ingeniería y Dirección
-- Dirección General
-- Ingeniería Civil
-- Departamento de Servidores Principales
-
-Cada piso cuenta con un switch principal que interconecta los switches departamentales.
+- Structured IPv4 base subnetting (`192.178.36.0/24`) with static gateway and endpoint mappings
+- Command-line switch provisioning with encrypted access passwords and customized hostnames
+- Packet-level validation covering full ARP resolution cycles and ICMP round-trip latency checks
+- Technical manual with complete switch CLI configurations and verification screenshots
 
 ---
 
-## 🌐 Configuración de Red
+## Technologies
 
-- **Red Base:** 192.178.36.0/24  
-- **Máscara:** 255.255.255.0  
-- **Direccionamiento:** Estático  
-- **Modelo de Switch:** Cisco 2960  
-
-Todos los switches fueron configurados mediante CLI con:
-
-- Hostname personalizado
-- Contraseña de acceso (carnet)
-- Guardado de configuración
+- Cisco Packet Tracer
+- Hardware Emulated: Cisco Catalyst 2960 Switches
+- Standards: TIA/EIA-568B Structured Cabling, IPv4, ARP, ICMP
 
 ---
 
-## 📁 Contenido del Repositorio
+## Repository Structure
 
-Practica1/
-│
-├── Topologia_Practica1.pkt
-├── Manual Tecnico.md
-└── imagenes/
+```
+Redes1_1S_2026_202201336/
+├── Practica1/
+│   ├── Topologia_Practica1.pkt    # Cisco Packet Tracer simulation
+│   ├── Manual_Tecnico.md          # Technical documentation
+│   └── imagenes/                  # Verification evidence and topology diagrams
+├── Practica2/                     # Practice 2 lab files
+├── Proyecto1/                     # Course Project 1 files
+├── Proyecto2/                     # Course Project 2 files
+└── README.md
+```
+
+---
+
+## Academic Context
+
+| Field       | Detail                                         |
+|-------------|------------------------------------------------|
+| Course      | Computer Networks 1 (REDES1)                   |
+| Institution | Universidad de San Carlos de Guatemala         |
+| Semester    | First Semester 2026                            |
+| Author      | Estuardo Josue Vaquiax Reyes (202201336)       |
